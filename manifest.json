@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Google Watchlist Quick Open",
+  "version": "0.0.0.1",
+  "description": "One-click shortcut to open Google’s Saved page and jump straight into your Search watchlist.",
+  "action": {
+    "default_title": "Google Watchlist Quick Open",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "permissions": ["tabs","scripting"],
+  "host_permissions": ["https://www.google.com/interests/saved*"],
+  "background": {"service_worker": "background.js"},
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

@@ -1,19 +1,11 @@
 const SAVED_URL = "https://www.google.com/interests/saved";
 
-chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab || !tab.id) return;
+chrome.action.onClicked.addListener(async () => {
+  // Open Saved page in a NEW tab
+  const newTab = await chrome.tabs.create({ url: SAVED_URL });
+  const targetTabId = newTab.id;
 
-  if (tab.url && tab.url.startsWith(SAVED_URL)) {
-    await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ["content.js"]
-    });
-    return;
-  }
-
-  const updatedTab = await chrome.tabs.update(tab.id, { url: SAVED_URL });
-  const targetTabId = updatedTab.id;
-
+  // When the new tab finishes loading, inject the content script
   function handleUpdated(tabId, changeInfo, updatedTabInfo) {
     if (
       tabId === targetTabId &&

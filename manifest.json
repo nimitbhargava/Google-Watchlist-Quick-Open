@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Google Watchlist Quick Open",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "description": "One-click shortcut to open Google’s Saved page and jump straight into your Search watchlist.",
   "action": {
     "default_title": "Google Watchlist Quick Open",

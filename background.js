@@ -1,6 +1,6 @@
 const SAVED_URL = "https://www.google.com/interests/saved";
 
-chrome.action.onClicked.addListener(async () => {
+async function openWatchlist() {
   // Open Saved page in a NEW tab
   const newTab = await chrome.tabs.create({ url: SAVED_URL });
   const targetTabId = newTab.id;
@@ -23,4 +23,14 @@ chrome.action.onClicked.addListener(async () => {
   }
 
   chrome.tabs.onUpdated.addListener(handleUpdated);
+}
+
+chrome.action.onClicked.addListener(async () => {
+  await openWatchlist();
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "OPEN_WATCHLIST") {
+    openWatchlist();
+  }
 });

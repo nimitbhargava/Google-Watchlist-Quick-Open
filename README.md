@@ -69,6 +69,7 @@ With **Google Watchlist Quick Open**, you get:
 1. Download this repository or ZIP.  
 2. Unzip the folder.  
 3. **Configuration**:
+    - Navigate to the `extension` folder.
     - Copy `config.example.js` to `config.js`.
     - Open `config.js` and replace the placeholders with your Google Analytics credentials:
       ```javascript
@@ -78,7 +79,7 @@ With **Google Watchlist Quick Open**, you get:
 4. Open `chrome://extensions/`.  
 5. Enable **Developer mode**.  
 6. Click **Load unpacked**.  
-7. Select the extension folder.  
+7. Select the `extension` folder.  
 8. Pin the extension icon (recommended).
 
 ---

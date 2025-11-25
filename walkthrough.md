@@ -6,7 +6,7 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
 ## Prerequisites
 - Chrome Browser
 - The extension code is updated locally.
-- **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `config.js` with your actual Google Analytics credentials.
+- **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `extension/config.js` with your actual Google Analytics credentials.
 
 ## Steps
 
@@ -38,9 +38,9 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
         2.  **Click "My List" Button**: Click the "My List" button on the search page.
             - **Check**: Another request to `google-analytics.com/mp/collect` should appear.
 
-5.  **Verify Git Ignore**
+6.  **Verify Git Ignore**
     - **Action**: Run `git status`.
-    - **Check**: `config.js` should **NOT** be listed.
+    - **Check**: `extension/config.js` should **NOT** be listed.
 
 6.  **Verify Landing Page**
     - **Action**: Open the file `landing-page/index.html` in your browser.

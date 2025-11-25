@@ -15,15 +15,15 @@ It provides two ways to access your list:
 ## ⭐ Features
 
 - **"My List" Button** injected directly into Google Search results (next to "Want to watch")
+- **Dynamic Theming**: Adapts to Dark/Light mode automatically
+- **Hover Effects**: Interactive blue underline on hover
 - **One-click access** to Google’s Search Watchlist via toolbar icon
 - Automatically opens:  
   `https://www.google.com/interests/saved`  
 - Detects and clicks the **“Search watchlist”** tile  
 - Works instantly from any tab  
-- No configuration required  
-- No data collection  
-- Fully offline — all code runs locally  
-- Zero background tracking, zero analytics, zero remote requests  
+- No data collection (except anonymous usage stats via GA4)  
+- Fully offline code execution (except analytics)  
 
 ---
 
@@ -68,11 +68,18 @@ With **Google Watchlist Quick Open**, you get:
 
 1. Download this repository or ZIP.  
 2. Unzip the folder.  
-3. Open `chrome://extensions/`.  
-4. Enable **Developer mode**.  
-5. Click **Load unpacked**.  
-6. Select the extension folder.  
-7. Pin the extension icon (recommended).
+3. **Configuration**:
+    - Copy `config.example.js` to `config.js`.
+    - Open `config.js` and replace the placeholders with your Google Analytics credentials:
+      ```javascript
+      export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+      export const GA_API_SECRET = "YOUR_API_SECRET";
+      ```
+4. Open `chrome://extensions/`.  
+5. Enable **Developer mode**.  
+6. Click **Load unpacked**.  
+7. Select the extension folder.  
+8. Pin the extension icon (recommended).
 
 ---
 
@@ -105,14 +112,18 @@ Allows the injected script to run on **that page only**.
 
 This extension:
 
-- Collects **no user data**  
-- Sends **no data** to servers  
-- Includes **no analytics**  
-- Uses **no remote code**  
+- Collects **no personal user data**  
 - Does **not** read browsing history  
-- Does **not** interact with pages outside the Saved page  
+- Does **not** interact with pages outside the Saved page (except for button injection on Google Search)
 
-**Everything runs locally on the user's device.**
+**Analytics (GA4)**:
+- The extension uses Google Analytics 4 to track anonymous usage statistics:
+    - **Extension Icon Clicks**: To measure usage frequency.
+    - **"My List" Button Clicks**: To measure feature engagement.
+- No personal identifiable information (PII) is collected.
+- You can disable analytics by removing the credentials in `config.js`.
+
+**Everything else runs locally on the user's device.**
 
 ---
 
@@ -124,16 +135,18 @@ If you encounter issues or want new features, feel free to open an issue or requ
 
 ## Privacy Policy – Google Watchlist Quick Open
 
-Google Watchlist Quick Open does not collect, store, or transmit any personal data from users.
+Google Watchlist Quick Open respects your privacy.
 
-The extension’s only behavior is:
+The extension’s behavior includes:
+- Opening the Google Saved page when the user clicks the extension icon.
+- Injecting a "My List" button on Google Search results.
+- Sending anonymous usage events (clicks) to Google Analytics.
 - Opening the Google Saved page at https://www.google.com/interests/saved when the user clicks the extension icon, and
 - Injecting a small script on that page to automatically click the “Search watchlist” collection tile.
 
 The extension does not:
 - Track browsing history
-- Read or modify the content of other websites
-- Send any data to external servers
-- Use analytics, advertising, or third-party tracking
+- Read or modify the content of other websites (except Google Search for button injection)
+- Send personal data to external servers
 
 If you have any questions about this extension, please contact at nimitbhargava@gmail.com

@@ -1,7 +1,7 @@
 # Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config & Landing Page
 
 ## Goal
-Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page looks good with the hero video**.
+Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page (including Privacy Policy) looks good**.
 
 ## Prerequisites
 - Chrome Browser
@@ -38,7 +38,7 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
         2.  **Click "My List" Button**: Click the "My List" button on the search page.
             - **Check**: Another request to `google-analytics.com/mp/collect` should appear.
 
-6.  **Verify Git Ignore**
+5.  **Verify Git Ignore**
     - **Action**: Run `git status`.
     - **Check**: `extension/config.js` should **NOT** be listed.
 
@@ -49,6 +49,11 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
         - **Hero Video**: Does the video at the top start playing automatically? Is it muted?
         - Are the other images (Features) displayed correctly?
         - Is the layout responsive?
+    - **Check Privacy Policy**:
+        - Scroll to the footer.
+        - Click the "Privacy Policy" link.
+        - Does it open `privacy.html`?
+        - Does the content look correct?
 
 ## Troubleshooting
 - **Video not playing?**

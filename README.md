@@ -8,6 +8,8 @@ It provides two ways to access your list:
 1.  **Extension Icon**: Click the toolbar icon to open your watchlist.
 2.  **"My List" Button**: A handy button injected directly into Google Search results for movies and TV shows.
 
+[![Available in the Chrome Web Store](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/i7586G99c68iF0mZ9h4a.png)](https://chromewebstore.google.com/detail/google-watchlist-quick-op/dofpcochmgmdamiiffjhbfheapnhldce)
+
 <img width="1280" height="800" alt="Frame 3" src="https://github.com/user-attachments/assets/6ca5e0d2-8b78-48cc-864f-0a05cae12df2" />
 
 ---

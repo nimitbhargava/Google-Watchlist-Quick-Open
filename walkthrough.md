@@ -1,12 +1,13 @@
 # Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config & Landing Page
 
 ## Goal
-Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page is responsive**.
+Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page (including Privacy Policy and Analytics) looks good**.
 
 ## Prerequisites
 - Chrome Browser
 - The extension code is updated locally.
 - **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `extension/config.js` with your actual Google Analytics credentials.
+- **IMPORTANT**: For the landing page, you must replace `G-XXXXXXXXXX` in `landing-page/index.html` and `landing-page/privacy.html` with your Web Data Stream ID.
 
 ## Steps
 
@@ -53,6 +54,17 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
         - **Check**: Is the text readable (not too big/small)?
         - **Check**: Is there enough spacing between elements?
         - **Check**: The "Add to Chrome" button in the header should disappear to save space.
+    - **Check Privacy Policy**:
+        - Scroll to the footer.
+        - Click the "Privacy Policy" link.
+        - Does it open `privacy.html`?
+        - Does the content look correct?
+
+7.  **Verify Landing Page Analytics**
+    - **Action**: View the source code of `landing-page/index.html` (Right-click -> View Page Source).
+    - **Check**: Search for "clarity". Is the script present?
+    - **Check**: Search for "googletagmanager". Is the script present?
+    - **Action**: Repeat for `landing-page/privacy.html`.
 
 ## Troubleshooting
 - **Video not playing?**

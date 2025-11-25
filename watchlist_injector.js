@@ -5,6 +5,12 @@
     const GOOGLE_BORDER = "#dadce0";
     const GOOGLE_BG_IDLE = "#ffffff";
 
+    const ICON_COLOR_DARK = "rgb(195, 198, 214)";
+    const ICON_COLOR_LIGHT = "rgb(84, 93, 126)";
+
+    const TEXT_COLOR_DARK = "#e8e8e8";
+    const TEXT_COLOR_LIGHT = "#1f1f1f";
+
     // Icon Signatures (SVG Path Data)
     const ICON_SIGNATURES = {
         // "Already watched" checkmark
@@ -13,17 +19,42 @@
         BOOKMARK: "M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
     };
 
-    // Icon: List with bullets
-    const ICON_LIST = `
-    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="${GOOGLE_GRAY}">
+    // Helper: Detect theme based on background brightness
+    function isDarkMode() {
+        const bgColor = window.getComputedStyle(document.body).backgroundColor;
+        // Parse RGB
+        const rgb = bgColor.match(/\d+/g);
+        if (rgb) {
+            // Calculate brightness (standard formula)
+            const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+            // If brightness is low (< 128), it's dark mode
+            return brightness < 128;
+        }
+        return false; // Default to light
+    }
+
+    function getThemeIconColor() {
+        return isDarkMode() ? ICON_COLOR_DARK : ICON_COLOR_LIGHT;
+    }
+
+    function getThemeTextColor() {
+        return isDarkMode() ? TEXT_COLOR_DARK : TEXT_COLOR_LIGHT;
+    }
+
+    // Icon: List with bullets (Standard 24px)
+    function getIconSvg(color) {
+        return `
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="${color}">
       <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
     </svg>`;
+    }
 
     // Inject Styles
     const style = document.createElement('style');
     style.textContent = `
     #${BUTTON_ID}:hover .my-watchlist-text {
         text-decoration: underline;
+        text-decoration-color: #1a0dab;
     }
     /* Force row to not wrap and allow scrolling */
     .my-watchlist-row {
@@ -39,18 +70,6 @@
   `;
     document.head.appendChild(style);
 
-    function getWantToWatchColor() {
-        // Try to find by text first (common languages)
-        const allElements = document.querySelectorAll('div, span, a, button');
-        for (const el of allElements) {
-            const text = el.textContent ? el.textContent.trim() : "";
-            if (["Want to watch", "Añadir a Mi lista", "希望观看", "À voir"].includes(text)) {
-                return window.getComputedStyle(el).color;
-            }
-        }
-        return GOOGLE_BLUE;
-    }
-
     function createButton(sourceButton) {
         const newBtn = sourceButton.cloneNode(true);
         newBtn.id = BUTTON_ID;
@@ -58,10 +77,17 @@
         newBtn.removeAttribute("jsaction");
         newBtn.removeAttribute("data-ved");
         newBtn.removeAttribute("jscontroller"); // Remove controller to prevent interference
+        newBtn.setAttribute("aria-pressed", "false"); // Reset pressed state
         newBtn.style.cursor = "pointer";
         newBtn.style.flexShrink = "0";
 
-        const targetColor = getWantToWatchColor();
+        // Remove "selected" attribute from any child (often used for the checkmark container)
+        const selectedChildren = newBtn.querySelectorAll('[selected="true"]');
+        for (const child of selectedChildren) {
+            child.removeAttribute("selected");
+        }
+
+        const targetColor = getThemeTextColor();
 
         // 1. Update Label
         let labelUpdated = false;
@@ -93,7 +119,9 @@
             // In the dump, the icon is in a span -> div.niO4u -> div.Q6Aqdc
             // We want to replace the SVG inside the span.
             const iconParent = oldIcon.parentElement;
-            iconParent.innerHTML = ICON_LIST;
+
+            const iconColor = getThemeIconColor();
+            iconParent.innerHTML = getIconSvg(iconColor);
 
             // Ensure the icon container (circle) has the right look.
             // If we cloned "Already watched", it should be white with gray border.
@@ -103,7 +131,7 @@
             // Heuristic: Reset styles on the icon parent to be safe
             iconParent.style.backgroundColor = "transparent";
             iconParent.style.border = "none";
-            iconParent.style.color = GOOGLE_GRAY;
+            iconParent.style.color = iconColor;
         }
 
         // 3. Add Click Listener

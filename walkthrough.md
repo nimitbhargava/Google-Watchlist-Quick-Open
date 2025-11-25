@@ -1,7 +1,7 @@
-# Verification Walkthrough: Placement & Layout
+# Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover
 
 ## Goal
-Verify the "My List" button is correctly placed at the end of the row (as a sibling) and stays on the same line.
+Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, and **hover style is correct**.
 
 ## Prerequisites
 - Chrome Browser
@@ -19,25 +19,35 @@ Verify the "My List" button is correctly placed at the end of the row (as a sibl
     - Search for a movie (e.g., "Inception").
     - **Check**: Does the button appear?
 
-3.  **Verify Placement**
-    - **Check**: Is the "My List" button **outside** the "Already watched" button?
-    - **Check**: It should be a separate circle next to the others, not nested inside.
-    - **Check**: Is it at the **end** of the row?
+3.  **Verify State Independence**
+    - **Action**: Click "Already watched" (or "Want to watch") so it becomes active/checked.
+    - **Check**: Does the "My List" button remain **unchecked** (normal state)?
+    - **Check**: The "My List" button should **not** have a filled background or look "pressed".
 
-4.  **Verify Layout**
-    - **Check**: Is the button on the **same horizontal line**?
-    - **Check**: Ensure it has **NOT** wrapped to a new line.
-    - **Check**: If the window is narrow, does the row allow horizontal scrolling?
-
-5.  **Verify Visuals**
+4.  **Verify Visuals & Dynamic Colors**
     - **Check**: Clean list icon.
     - **Check**: White circle with gray border.
-    - **Check**: Text color matches "Want to watch".
+    
+    **Theme Verification:**
+    - **Light Mode**:
+        - **Check Icon**: Bluish gray (`rgb(84, 93, 126)`).
+        - **Check Text**: Almost black (`#1f1f1f`).
+    - **Dark Mode**:
+        - **Check Icon**: Light gray (`rgb(195, 198, 214)`).
+        - **Check Text**: Off-white (`#e8e8e8`).
+
+5.  **Verify Hover Style**
+    - **Action**: Hover over the "My List" button (specifically the text).
+    - **Check**: Does the text get underlined?
+    - **Check**: Is the underline color **Blue** (`#1a0dab`)?
+    - **Note**: The text color itself should remain the theme color (black/white), only the underline should be blue.
 
 6.  **Verify Interaction**
     - **Action**: Click the button.
     - **Check**: Does it open the watchlist?
 
 ## Troubleshooting
-- **Button inside another button?**
-    - The script logic for finding the row parent might be failing. Inspect the DOM to see where `my-custom-watchlist-btn` is inserted.
+- **Underline not blue?**
+    - Inspect the element in DevTools.
+    - Force "hover" state.
+    - Check if `text-decoration-color: #1a0dab` is applied.

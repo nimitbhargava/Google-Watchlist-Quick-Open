@@ -1,12 +1,12 @@
-# Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config
+# Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config & Landing Page
 
 ## Goal
-Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, and **configuration is loaded correctly**.
+Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page looks good with the hero video**.
 
 ## Prerequisites
 - Chrome Browser
 - The extension code is updated locally.
-- **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `config.js` (NOT `background.js`) with your actual Google Analytics credentials.
+- **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `config.js` with your actual Google Analytics credentials.
 
 ## Steps
 
@@ -14,7 +14,6 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
     - Go to `chrome://extensions`.
     - Find "Google Watchlist Quick Open".
     - Click the **Refresh** (circular arrow) icon.
-    - **Check**: Ensure there are no errors (red "Errors" button). If there are errors about "import", ensure your Chrome version supports ES modules in Service Workers (Chrome 91+).
 
 2.  **Perform a Search**
     - Open a new tab and go to [Google.com](https://www.google.com).
@@ -29,7 +28,7 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
 4.  **Verify Analytics (Network Check)**
     - **Open Service Worker Console**:
         - Go to `chrome://extensions`.
-        - Click the blue link **"service worker"** (or "background page").
+        - Click the blue link **"service worker"**.
     - **Go to Network Tab**:
         - Switch to the **Network** tab.
         - Filter by "collect".
@@ -40,10 +39,18 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
             - **Check**: Another request to `google-analytics.com/mp/collect` should appear.
 
 5.  **Verify Git Ignore**
-    - **Action**: Run `git status` in your terminal.
-    - **Check**: `config.js` should **NOT** be listed as untracked or modified (if it was previously tracked, you might need to `git rm --cached config.js`).
-    - **Check**: `config.example.js` **SHOULD** be tracked.
+    - **Action**: Run `git status`.
+    - **Check**: `config.js` should **NOT** be listed.
+
+6.  **Verify Landing Page**
+    - **Action**: Open the file `landing-page/index.html` in your browser.
+    - **Check**:
+        - Does the page load with the "Google Watchlist Quick Open" title?
+        - **Hero Video**: Does the video at the top start playing automatically? Is it muted?
+        - Are the other images (Features) displayed correctly?
+        - Is the layout responsive?
 
 ## Troubleshooting
-- **"Cannot use import statement outside a module"**:
-    - Ensure `manifest.json` has `"type": "module"` in the `background` section.
+- **Video not playing?**
+    - Ensure `google-watchlist-quick-open.webm` is in `landing-page/assets/`.
+    - Some browsers block autoplay if not muted. Ensure `muted` attribute is present.

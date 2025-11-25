@@ -1,6 +1,5 @@
 (function () {
   const TARGET_LABELS = ["search watchlist", "watchlist search"];
-  const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
   function matchesTarget(el) {
     const text = (
@@ -16,28 +15,39 @@
     return TARGET_LABELS.some((label) => text.includes(label));
   }
 
-  async function clickSearchWatchlistTile(timeout = 10000) {
-    const start = performance.now();
-    while (performance.now() - start < timeout) {
-      const elements = document.querySelectorAll(
-        'a, button, div[role="link"], [aria-label], [title]'
-      );
+  function clickSearchWatchlistTile() {
+    const elements = document.querySelectorAll(
+      'a, button, div[role="link"], [aria-label], [title]'
+    );
 
-      for (const el of elements) {
-        if (matchesTarget(el)) {
-          console.log("[Google Watchlist Quick Open] Found tile, clicking...");
-          el.click();
-          return true;
-        }
+    for (const el of elements) {
+      if (matchesTarget(el)) {
+        console.log("[Google Watchlist Quick Open] Found tile, clicking...");
+        el.click();
+        return true;
       }
-      await wait(250);
     }
     return false;
   }
 
-  (async () => {
-    console.log("[Google Watchlist Quick Open] Searching for tile...");
-    const ok = await clickSearchWatchlistTile();
-    if (!ok) console.warn("[Google Watchlist Quick Open] Tile not found.");
-  })();
+  // Initial check
+  if (clickSearchWatchlistTile()) return;
+
+  // Observer for dynamic loading
+  const observer = new MutationObserver((mutations) => {
+    if (clickSearchWatchlistTile()) {
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  // Safety timeout to stop observing after 10 seconds
+  setTimeout(() => {
+    observer.disconnect();
+    console.log("[Google Watchlist Quick Open] Observer disconnected (timeout).");
+  }, 10000);
 })();

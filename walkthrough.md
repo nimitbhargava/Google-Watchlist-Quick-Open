@@ -1,78 +1,39 @@
-# Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config & Landing Page
+# Improvements Walkthrough
 
-## Goal
-Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page (including Privacy Policy, Analytics, and Social Preview) looks good**.
+I have implemented several improvements to enhance the reliability of the extension and the performance/SEO of the landing page.
 
-## Prerequisites
-- Chrome Browser
-- The extension code is updated locally.
-- **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `extension/config.js` with your actual Google Analytics credentials.
-- **IMPORTANT**: For the landing page, you must replace `G-XXXXXXXXXX` in `landing-page/analytics.js` with your Web Data Stream ID.
+## 1. Extension Reliability (`content.js`)
 
-## Steps
+I refactored `content.js` to replace the polling mechanism (which checked for the button every 250ms) with a **MutationObserver**.
 
-1.  **Reload the Extension**
-    - Go to `chrome://extensions`.
-    - Find "Google Watchlist Quick Open".
-    - Click the **Refresh** (circular arrow) icon.
+-   **Benefit**: The extension now detects the "Search watchlist" tile *immediately* when it appears in the DOM, resulting in a faster and more reliable click.
+-   **Efficiency**: It stops observing as soon as the button is found or after a 10-second timeout, reducing unnecessary processing.
 
-2.  **Perform a Search**
-    - Open a new tab and go to [Google.com](https://www.google.com).
-    - Search for a movie (e.g., "Inception").
-    - **Check**: Does the button appear?
+## 2. Landing Page Performance
 
-3.  **Verify Visuals & Interaction**
-    - **Check**: Icon/Text color adapts to theme (Dark/Light).
-    - **Check**: Hover underline is blue (`#1a0dab`).
-    - **Check**: Button state is independent.
+I converted all PNG assets to **WebP** format. WebP offers superior compression, significantly reducing the page load time.
 
-4.  **Verify Analytics (Network Check)**
-    - **Open Service Worker Console**:
-        - Go to `chrome://extensions`.
-        - Click the blue link **"service worker"**.
-    - **Go to Network Tab**:
-        - Switch to the **Network** tab.
-        - Filter by "collect".
-    - **Trigger Events**:
-        1.  **Click Extension Icon**: Click the extension icon.
-            - **Check**: A request to `google-analytics.com/mp/collect` should appear.
-        2.  **Click "My List" Button**: Click the "My List" button on the search page.
-            - **Check**: Another request to `google-analytics.com/mp/collect` should appear.
+-   `feature-1.png` → `feature-1.webp`
+-   `feature-2.png` → `feature-2.webp`
+-   `feature-3.png` → `feature-3.webp`
+-   `hero-logo.png` → `hero-logo.webp`
+-   `social-preview.png` → `social-preview.webp`
 
-5.  **Verify Git Ignore**
-    - **Action**: Run `git status`.
-    - **Check**: `extension/config.js` should **NOT** be listed.
+The `index.html` file was updated to serve these new lightweight images.
 
-6.  **Verify Landing Page (Desktop & Mobile)**
-    - **Action**: Open the file `landing-page/index.html` in your browser.
-    - **Desktop Check**:
-        - Does the page load with the "Google Watchlist Quick Open" title?
-        - **Hero Video**: Does the video at the top start playing automatically? Is it muted?
-    - **Mobile Check**:
-        - Resize your browser window to be narrow (like a phone).
-        - **Check**: Does the layout stack vertically?
-        - **Check**: Is the text readable (not too big/small)?
-        - **Check**: Is there enough spacing between elements?
-        - **Check**: The "Add to Chrome" button in the header should disappear to save space.
-    - **Check Privacy Policy**:
-        - Scroll to the footer.
-        - Click the "Privacy Policy" link.
-        - Does it open `privacy.html`?
-        - Does the content look correct?
+## 3. SEO Enhancements
 
-7.  **Verify Landing Page Analytics**
-    - **Action**: View the source code of `landing-page/index.html` (Right-click -> View Page Source).
-    - **Check**: Is `<script src="analytics.js"></script>` present in the `<head>`?
-    - **Action**: Open the **Network** tab in DevTools.
-    - **Check**: Reload the page. Do you see requests to `clarity.ms` and `googletagmanager.com`?
+I added **Structured Data (JSON-LD)** to the landing page.
 
-8.  **Verify Social Media Preview**
-    - **Action**: View the source code of `landing-page/index.html`.
-    - **Check**: Look for `<meta property="og:image" ...>`.
-    - **Check**: Does it point to `https://google-watchlist.nimit.dev/assets/social-preview.png`?
-    - **Action**: Open `landing-page/assets/social-preview.png` in your browser to see the image that will be used.
+-   **Schema**: `SoftwareApplication`
+-   **Benefit**: This helps search engines understand that the page represents a software product, potentially enabling rich snippets (like app details, ratings, etc.) in search results.
 
-## Troubleshooting
-- **Video not playing?**
-    - Ensure `google-watchlist-quick-open.webm` is in `landing-page/assets/`.
-    - Some browsers block autoplay if not muted. Ensure `muted` attribute is present.
+## Verification Results
+
+### Extension
+-   [x] `content.js` logic updated to use `MutationObserver`.
+
+### Landing Page
+-   [x] All images converted to `.webp`.
+-   [x] `index.html` references `.webp` images.
+-   [x] JSON-LD script added to `<head>`.

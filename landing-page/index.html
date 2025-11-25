@@ -14,7 +14,7 @@
     <meta property="og:title" content="Google Watchlist Quick Open">
     <meta property="og:description"
         content="Instantly access your Google Watchlist and manage it directly from Search results with a custom 'My List' button.">
-    <meta property="og:image" content="https://google-watchlist.nimit.dev/assets/social-preview.png">
+    <meta property="og:image" content="https://google-watchlist.nimit.dev/assets/social-preview.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
     <meta property="twitter:title" content="Google Watchlist Quick Open">
     <meta property="twitter:description"
         content="Instantly access your Google Watchlist and manage it directly from Search results with a custom 'My List' button.">
-    <meta property="twitter:image" content="https://google-watchlist.nimit.dev/assets/social-preview.png">
+    <meta property="twitter:image" content="https://google-watchlist.nimit.dev/assets/social-preview.webp">
 
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,30 @@
 
     <!-- Analytics -->
     <script src="analytics.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Google Watchlist Quick Open",
+      "operatingSystem": "Chrome",
+      "applicationCategory": "BrowserApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Instantly access your Google Watchlist and manage it directly from Search results with a custom 'My List' button.",
+      "image": "https://google-watchlist.nimit.dev/assets/social-preview.webp",
+      "featureList": "One-click access to Google Watchlist, 'My List' button in Search results, Dark mode support",
+      "screenshot": "https://google-watchlist.nimit.dev/assets/feature-1.webp",
+      "author": {
+        "@type": "Person",
+        "name": "Nimit Bhargava"
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -62,7 +86,7 @@
             </div>
             <div class="hero-image">
                 <video src="assets/google-watchlist-quick-open.webm" autoplay muted loop playsinline preload="metadata"
-                    poster="assets/hero-logo.png" style="width: 100%; height: auto; display: block;">
+                    poster="assets/hero-logo.webp" style="width: 100%; height: auto; display: block;">
                 </video>
             </div>
         </div>
@@ -79,7 +103,7 @@
                     <h3>One Click to Watchlist</h3>
                     <p>Bypass the 4-step navigation. Click the extension icon and land instantly on your Google
                         Watchlist. It's the fastest way to access your saved content.</p>
-                    <img src="assets/feature-1.png" alt="My List Button" class="feature-image">
+                    <img src="assets/feature-1.webp" alt="My List Button" class="feature-image">
                 </div>
 
                 <!-- Feature 2 -->
@@ -88,7 +112,7 @@
                     <h3>Seamless Integration</h3>
                     <p>We add a native-feeling "My List" button right next to "Want to watch" in Google Search. Add
                         movies to your list without ever leaving your search results.</p>
-                    <img src="assets/feature-2.png" alt="Dark Mode Support" class="feature-image">
+                    <img src="assets/feature-2.webp" alt="Dark Mode Support" class="feature-image">
                 </div>
 
                 <!-- Feature 3 -->
@@ -97,7 +121,7 @@
                     <h3>Beautifully Native</h3>
                     <p>Designed to feel like it belongs. The interface automatically adapts to your browser's Dark or
                         Light mode, ensuring a perfect visual match with Google's design.</p>
-                    <img src="assets/feature-3.png" alt="Dark Mode Support" class="feature-image">
+                    <img src="assets/feature-3.webp" alt="Dark Mode Support" class="feature-image">
                 </div>
             </div>
         </div>

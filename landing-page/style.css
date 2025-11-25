@@ -229,12 +229,66 @@ footer a {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+    /* Typography */
     h1 {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
     }
 
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    /* Layout */
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
+    /* Header */
+    header .btn {
+        display: none;
+        /* Hide header button on mobile to save space */
+    }
+
+    /* Hero */
     .hero {
-        padding: 4rem 0;
+        padding: 3rem 0;
+    }
+
+    .hero-content {
+        margin-bottom: 2rem;
+    }
+
+    /* Features */
+    .features-grid {
+        grid-template-columns: 1fr;
+        /* Stack cards vertically */
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    /* How It Works */
+    .steps {
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    .step {
+        min-width: 100%;
     }
 }
 

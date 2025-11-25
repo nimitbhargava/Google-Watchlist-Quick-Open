@@ -1,7 +1,7 @@
 # Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config & Landing Page
 
 ## Goal
-Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page (including Privacy Policy) looks good**.
+Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page is responsive**.
 
 ## Prerequisites
 - Chrome Browser
@@ -42,18 +42,17 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
     - **Action**: Run `git status`.
     - **Check**: `extension/config.js` should **NOT** be listed.
 
-6.  **Verify Landing Page**
+6.  **Verify Landing Page (Desktop & Mobile)**
     - **Action**: Open the file `landing-page/index.html` in your browser.
-    - **Check**:
+    - **Desktop Check**:
         - Does the page load with the "Google Watchlist Quick Open" title?
         - **Hero Video**: Does the video at the top start playing automatically? Is it muted?
-        - Are the other images (Features) displayed correctly?
-        - Is the layout responsive?
-    - **Check Privacy Policy**:
-        - Scroll to the footer.
-        - Click the "Privacy Policy" link.
-        - Does it open `privacy.html`?
-        - Does the content look correct?
+    - **Mobile Check**:
+        - Resize your browser window to be narrow (like a phone).
+        - **Check**: Does the layout stack vertically?
+        - **Check**: Is the text readable (not too big/small)?
+        - **Check**: Is there enough spacing between elements?
+        - **Check**: The "Add to Chrome" button in the header should disappear to save space.
 
 ## Troubleshooting
 - **Video not playing?**

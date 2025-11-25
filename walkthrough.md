@@ -1,13 +1,13 @@
 # Verification Walkthrough: Placement & Layout & Dynamic Color & State & Hover & Analytics & Config & Landing Page
 
 ## Goal
-Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page (including Privacy Policy and Analytics) looks good**.
+Verify the "My List" button is correctly placed, layout is correct, icon/text color adapts to the theme, state is independent, hover style is correct, analytics events are sent, configuration is loaded correctly, and **the marketing landing page (including Privacy Policy, Analytics, and Social Preview) looks good**.
 
 ## Prerequisites
 - Chrome Browser
 - The extension code is updated locally.
 - **IMPORTANT**: You must replace `G-XXXXXXXXXX` and `YOUR_API_SECRET` in `extension/config.js` with your actual Google Analytics credentials.
-- **IMPORTANT**: For the landing page, you must replace `G-XXXXXXXXXX` in `landing-page/index.html` and `landing-page/privacy.html` with your Web Data Stream ID.
+- **IMPORTANT**: For the landing page, you must replace `G-XXXXXXXXXX` in `landing-page/analytics.js` with your Web Data Stream ID.
 
 ## Steps
 
@@ -62,9 +62,15 @@ Verify the "My List" button is correctly placed, layout is correct, icon/text co
 
 7.  **Verify Landing Page Analytics**
     - **Action**: View the source code of `landing-page/index.html` (Right-click -> View Page Source).
-    - **Check**: Search for "clarity". Is the script present?
-    - **Check**: Search for "googletagmanager". Is the script present?
-    - **Action**: Repeat for `landing-page/privacy.html`.
+    - **Check**: Is `<script src="analytics.js"></script>` present in the `<head>`?
+    - **Action**: Open the **Network** tab in DevTools.
+    - **Check**: Reload the page. Do you see requests to `clarity.ms` and `googletagmanager.com`?
+
+8.  **Verify Social Media Preview**
+    - **Action**: View the source code of `landing-page/index.html`.
+    - **Check**: Look for `<meta property="og:image" ...>`.
+    - **Check**: Does it point to `https://google-watchlist.nimit.dev/assets/social-preview.png`?
+    - **Action**: Open `landing-page/assets/social-preview.png` in your browser to see the image that will be used.
 
 ## Troubleshooting
 - **Video not playing?**

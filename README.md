@@ -21,8 +21,7 @@ It provides two ways to access your list:
 - **Hover Effects**: Interactive blue underline on hover
 - **One-click access** to Google’s Search Watchlist via toolbar icon
 - Automatically opens:  
-  `https://www.google.com/interests/saved`  
-- Detects and clicks the **“Search watchlist”** tile  
+  `https://www.google.com/search?q=my+watchlist`  
 - Works instantly from any tab  
 - No data collection (except anonymous usage stats via GA4)  
 - Fully offline code execution (except analytics)  
@@ -54,10 +53,8 @@ With **Google Watchlist Quick Open**, you get:
 
 ### Method 1: Extension Icon
 1. You click the extension icon.  
-2. If you’re not on the Saved page, it navigates there automatically.  
-3. Once loaded, the extension locates the **Search watchlist** tile.  
-4. It clicks the tile for you.  
-5. You land instantly in the Search Watchlist view.
+2. It opens a new tab with the Google Search query "my watchlist".
+3. You usually see your watchlist immediately.
 
 ### Method 2: "My List" Button
 1. Search for a movie or TV show on Google (e.g., "Inception").
@@ -90,19 +87,15 @@ With **Google Watchlist Quick Open**, you get:
 
 ### **tabs**
 Used only to:
-- Navigate the current tab to Google’s Saved page  
-- Check if the user is already on the correct page  
+- Open the new tab with the "my watchlist" search query.
 
 ### **scripting**
-Used only to:
-- Inject a small script into `https://www.google.com/interests/saved*`  
-- Click the “Search watchlist” tile
+*(No longer actively used for logic, may be removed in future versions)*
+Previously used to inject scripts into the Saved page, now simplified.
 
 ### **Host Permission**
-```
-https://www.google.com/interests/saved*
-```
-Allows the injected script to run on **that page only**.
+*(None)*
+The extension no longer requires host permissions for the Saved page.
 
 ### **Content Scripts**
 - Runs on `https://www.google.com/search*`
@@ -141,11 +134,9 @@ If you encounter issues or want new features, feel free to open an issue or requ
 Google Watchlist Quick Open respects your privacy.
 
 The extension’s behavior includes:
-- Opening the Google Saved page when the user clicks the extension icon.
+- Opening the Google Search page for "my watchlist" when the user clicks the extension icon.
 - Injecting a "My List" button on Google Search results.
 - Sending anonymous usage events (clicks) to Google Analytics.
-- Opening the Google Saved page at https://www.google.com/interests/saved when the user clicks the extension icon, and
-- Injecting a small script on that page to automatically click the “Search watchlist” collection tile.
 
 The extension does not:
 - Track browsing history

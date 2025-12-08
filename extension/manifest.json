@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Google Watchlist Quick Open",
-  "version": "0.0.0.5",
+  "version": "0.0.0.6",
   "description": "Instantly access your Google Watchlist and manage it directly from Search results with a custom 'My List' button.",
   "action": {
     "default_title": "Google Watchlist Quick Open",
@@ -16,9 +16,7 @@
     "scripting",
     "storage"
   ],
-  "host_permissions": [
-    "https://www.google.com/interests/saved*"
-  ],
+  "host_permissions": [],
   "background": {
     "service_worker": "background.js",
     "type": "module"

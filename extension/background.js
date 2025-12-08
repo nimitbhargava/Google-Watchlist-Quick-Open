@@ -1,6 +1,6 @@
 import { GA_MEASUREMENT_ID, GA_API_SECRET } from "./config.js";
 
-const SAVED_URL = "https://www.google.com/interests/saved";
+const SAVED_URL = "https://www.google.com/search?q=my+watchlist";
 
 // --- Analytics Configuration ---
 const GA_ENDPOINT = "https://www.google-analytics.com/mp/collect";
@@ -58,28 +58,8 @@ async function sendAnalyticsEvent(eventName, params = {}) {
 // --- Main Extension Logic ---
 
 async function openWatchlist() {
-  // Open Saved page in a NEW tab
-  const newTab = await chrome.tabs.create({ url: SAVED_URL });
-  const targetTabId = newTab.id;
-
-  // When the new tab finishes loading, inject the content script
-  function handleUpdated(tabId, changeInfo, updatedTabInfo) {
-    if (
-      tabId === targetTabId &&
-      changeInfo.status === "complete" &&
-      updatedTabInfo.url &&
-      updatedTabInfo.url.startsWith(SAVED_URL)
-    ) {
-      chrome.tabs.onUpdated.removeListener(handleUpdated);
-
-      chrome.scripting.executeScript({
-        target: { tabId: targetTabId },
-        files: ["content.js"]
-      });
-    }
-  }
-
-  chrome.tabs.onUpdated.addListener(handleUpdated);
+  // Open Search page with "my watchlist" query in a NEW tab
+  await chrome.tabs.create({ url: SAVED_URL });
 }
 
 // Track Extension Icon Click
